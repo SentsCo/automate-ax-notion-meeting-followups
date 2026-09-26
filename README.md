@@ -18,6 +18,8 @@ You'll choose:
 - Which notes are safe for Automate.ax AI to read.
 - Account authorization for Notion, Linear, and Slack.
 
+Automate.ax AI reads the first 6,000 characters of the selected note to find action items. Keep sensitive meetings outside the marked scope, and review what the integration account can access.
+
 ## Manual setup
 
 If you prefer to set it up yourself:
