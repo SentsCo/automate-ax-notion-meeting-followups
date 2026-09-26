@@ -100,15 +100,27 @@ export default automation(
 
       slack.sendMessage({
         conversation: parameters.slackChannelId,
-        text: t`Meeting follow-up created: ${issue.url}`,
+        text: t`Meeting follow-up created: ${issue.url}`.transform(
+          escapeSlackText,
+        ),
         unfurlLinks: false,
       })
 
       slack.sendMessage({
         conversation: parameters.slackChannelId,
-        text: t`Review this unassigned or undated follow-up: ${needsReview.title}\n${needsReview.detail}\nhttps://www.notion.so/${page.id}`,
+        text: t`Review this unassigned or undated follow-up: ${needsReview.title}\n${needsReview.detail}\nhttps://www.notion.so/${page.id}`.transform(
+          escapeSlackText,
+        ),
         unfurlLinks: false,
       })
     })
   },
 )
+
+/** Keeps provider text from becoming Slack mentions or control markup. */
+function escapeSlackText(text: string) {
+  return text
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+}
